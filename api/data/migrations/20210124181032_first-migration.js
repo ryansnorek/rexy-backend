@@ -47,6 +47,9 @@ exports.up = async (knex) => {
     })
     .createTable("user_relationships", (user_relationships) => {
       user_relationships.increments("user_relationship_id");
+      user_relationships.boolean("blocked")
+      user_relationships.boolean("following")
+      user_relationships.boolean("follower")
       user_relationships
         .integer("user_id")
         .notNullable()
