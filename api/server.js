@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const authRouter = require("./auth/auth.router");
 const usersRouter = require("./routers/users-router");
-// const plantsRouter = require("./plants/plants-router");
+const profileRouter = require("./routers/user-profile-router");
 
 const server = express();
 server.use(express.static(path.join(__dirname, "../client")));
@@ -15,7 +15,7 @@ server.use(cors());
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
-// server.use("/api/plants", plantsRouter);
+server.use("/api/profile", profileRouter);
 
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client", "index.html"));
