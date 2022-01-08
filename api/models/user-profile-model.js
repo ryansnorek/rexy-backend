@@ -80,8 +80,3 @@ async function deleteTvShow(tv_show) {
   return deletedTvShow;
 }
 
-// function getFollowers(user_id) {
-//     return db("user_relationships")
-//         .where("user_id", user_id)
-//         .select("tv_show_id");
-//   }

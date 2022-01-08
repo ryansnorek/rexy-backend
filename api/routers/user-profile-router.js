@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const restricted = require("../middleware/restricted");
 const {
   checkIfUserHasMovie,
   checkIfUserHasTvShow,
@@ -6,7 +7,7 @@ const {
 const Profile = require("../models/user-profile-model");
 
 // PROFILE //
-router.get("/", (req, res, next) => {
+router.get("/", restricted, (req, res, next) => {
   Profile.getAll()
     .then((profiles) => {
       res.json(profiles);
@@ -14,7 +15,7 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", restricted, (req, res, next) => {
   Profile.getProfile(req.params.id)
     .then((profile) => {
       res.json(profile);
@@ -22,7 +23,7 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", restricted, (req, res, next) => {
   Profile.createProfile(req.body)
     .then((newProfile) => {
       res.json(newProfile);
@@ -31,7 +32,7 @@ router.post("/", (req, res, next) => {
 });
 
 // MOVIES //
-router.get("/:id/movies", (req, res, next) => {
+router.get("/:id/movies", restricted, (req, res, next) => {
   Profile.getMovies(req.params.id)
     .then((movies) => {
       res.json(movies);
@@ -39,15 +40,19 @@ router.get("/:id/movies", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/movies", checkIfUserHasMovie, (req, res, next) => {
-  Profile.addMovie(req.body)
-    .then((newMovie) => {
-      res.json(newMovie);
-    })
-    .catch(next);
+router.post(
+  "/movies", 
+  restricted, 
+  checkIfUserHasMovie, 
+    (req, res, next) => {
+    Profile.addMovie(req.body)
+      .then((newMovie) => {
+        res.json(newMovie);
+      })
+      .catch(next);
 });
 
-router.delete("/movies", (req, res, next) => {
+router.delete("/movies", restricted, (req, res, next) => {
   Profile.deleteMovie(req.body)
     .then((deletedMovie) => {
       res.json(deletedMovie);
@@ -55,7 +60,7 @@ router.delete("/movies", (req, res, next) => {
     .catch(next);
 });
 // TV SHOWS //
-router.get("/:id/tv-shows", (req, res, next) => {
+router.get("/:id/tv-shows", restricted, (req, res, next) => {
   Profile.getTvShows(req.params.id)
     .then((tvShows) => {
       res.json(tvShows);
@@ -63,15 +68,19 @@ router.get("/:id/tv-shows", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/tv-shows", checkIfUserHasTvShow, (req, res, next) => {
-  Profile.addTvShow(req.body)
-    .then((newTvShow) => {
-      res.json(newTvShow);
-    })
-    .catch(next);
+router.post(
+  "/tv-shows", 
+  restricted, 
+  checkIfUserHasTvShow, 
+    (req, res, next) => {
+    Profile.addTvShow(req.body)
+      .then((newTvShow) => {
+        res.json(newTvShow);
+      })
+      .catch(next);
 });
 
-router.delete("/tv-shows", (req, res, next) => {
+router.delete("/tv-shows", restricted, (req, res, next) => {
     Profile.deleteTvShow(req.body)
       .then((deletedTvShow) => {
         res.json(deletedTvShow);
