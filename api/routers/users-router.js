@@ -4,7 +4,7 @@ const restricted = require("../middleware/restricted");
 const { checkIfUserExists } = require("../middleware/users-middleware");
 const { hashPassword } = require("../auth/auth-middleware");
 
-router.get("/", (req, res, next) => {
+router.get("/", restricted, (req, res, next) => {
   Users.getAll()
     .then((users) => {
       res.json(users);
@@ -12,7 +12,7 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", restricted, (req, res, next) => {
   Users.getById(req.params.id)
     .then((user) => {
       res.json(user);
