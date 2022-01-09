@@ -61,7 +61,7 @@ function getTvShows(user_id) {
 
 async function addTvShow(tvShow) {
   const [newTvShow] = await db("user_tv_shows").insert(tvShow, [
-    "user_tv_show",
+    "user_tv_show_id",
     "tv_show_id",
     "user_id",
   ]);
