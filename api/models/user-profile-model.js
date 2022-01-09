@@ -4,6 +4,7 @@ module.exports = {
   getAll,
   getProfile,
   createProfile,
+  updateProfile,
   getMovies,
   addMovie,
   deleteMovie,
@@ -23,11 +24,23 @@ function getProfile(user_id) {
 async function createProfile(profile) {
   const [newProfile] = await db("user_profile").insert(profile, [
     "user_profile_id",
-    "ptype",
+    "display_name",
+    "personality_type",
     "uploaded_image",
     "user_id",
   ]);
   return newProfile;
+}
+async function updateProfile(profile, user_id) {
+  const [updatedProfile] = await db("user_profile")
+    .where("user_id", user_id)
+    .update(profile, [
+      "user_id",
+      "display_name",
+      "personality_type",
+      "uploaded_image",
+    ]);
+  return updatedProfile;
 }
 
 function getMovies(user_id) {
@@ -48,10 +61,7 @@ async function deleteMovie(movie) {
   const [deletedMovie] = await db("user_movies")
     .where("user_id", user_id)
     .andWhere("movie_id", movie_id)
-    .delete([
-      "user_id", 
-      "movie_id"
-    ]);
+    .delete(["user_id", "movie_id"]);
   return deletedMovie;
 }
 
@@ -73,10 +83,6 @@ async function deleteTvShow(tv_show) {
   const [deletedTvShow] = await db("user_tv_shows")
     .where("user_id", user_id)
     .andWhere("tv_show_id", tv_show_id)
-    .delete([
-      "user_id", 
-      "tv_show_id",
-    ]);
+    .delete(["user_id", "tv_show_id"]);
   return deletedTvShow;
 }
-

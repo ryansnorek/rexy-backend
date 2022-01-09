@@ -12,7 +12,7 @@ exports.up = async (knex) => {
     .createTable("user_profile", (user_profile) => {
       user_profile.increments("user_profile_id");
       user_profile.string("display_name", 333);
-      user_profile.string("ptype", 4);
+      user_profile.string("personality_type", 4);
       user_profile.binary("uploaded_image", 255);
       user_profile.timestamps(false, true);
       user_profile
