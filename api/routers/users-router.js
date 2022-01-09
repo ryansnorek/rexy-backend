@@ -20,6 +20,14 @@ router.get("/:id", restricted, (req, res, next) => {
     .catch(next);
 });
 
+router.get("/:username", restricted, (req, res, next) => {
+  Users.findByUsername(req.params.username)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch(next);
+});
+
 router.put(
   "/:id",
   checkIfUserExists,
