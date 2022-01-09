@@ -1,8 +1,7 @@
 const db = require("../data/db-config");
 
 function getAll() {
-  return db("users")
-    .select("user_id", "username", "created_at", "updated_at");
+  return db("users").select("user_id", "username", "created_at", "updated_at");
 }
 
 function getById(user_id) {
@@ -17,6 +16,12 @@ function findByUsername(username) {
     .select("user_id", "username", "password")
     .where("username", username)
     .first();
+}
+
+function searchUsername(query) {
+  return db("users")
+    .select("user_id", "username")
+    .where("username", "like", `%${query}%`);
 }
 
 async function createUser(user) {
@@ -48,6 +53,7 @@ module.exports = {
   getAll,
   getById,
   findByUsername,
+  searchUsername,
   createUser,
   updateUser,
   deleteUser,

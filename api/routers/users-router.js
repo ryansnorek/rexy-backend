@@ -20,8 +20,8 @@ router.get("/:id", restricted, (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:username", restricted, (req, res, next) => {
-  Users.findByUsername(req.params.username)
+router.get("/:query", restricted, (req, res, next) => {
+  Users.searchUsername(req.params.query)
     .then((user) => {
       res.json(user);
     })
