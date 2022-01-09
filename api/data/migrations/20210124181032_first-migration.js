@@ -2,14 +2,16 @@ exports.up = async (knex) => {
   await knex.schema
     .createTable("users", (users) => {
       users.increments("user_id");
-      users.string("username", 200).notNullable().unique();
-      users.string("password", 200).notNullable();
+      users.string("username", 33).notNullable().unique();
+      users.string("password", 33).notNullable();
       users.string("phone", 10).notNullable().unique();
-      users.string("email", 50).notNullable().unique();
+      users.string("email", 66).notNullable().unique();
+      users.boolean("admin").defaultsTo(false);
       users.timestamps(false, true);
     })
     .createTable("user_profile", (user_profile) => {
       user_profile.increments("user_profile_id");
+      user_profile.string("display_name", 33);
       user_profile.string("ptype", 4);
       user_profile.binary("uploaded_image", 255);
       user_profile.timestamps(false, true);
@@ -57,7 +59,7 @@ exports.up = async (knex) => {
         .inTable("users")
         .onDelete("CASCADE");
       user_relationships
-        .integer("other_user_id")
+        .integer("relative_user_id")
         .notNullable()
         .references("user_id")
         .inTable("users")
