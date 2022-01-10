@@ -31,6 +31,13 @@ router.post("/", restricted, (req, res, next) => {
     .catch(next);
 });
 
+router.post("/following", restricted, (req, res, next) => {
+  Profile.followUser(req.body)
+    .then((relationship) => {
+      res.json(relationship);
+    })
+    .catch(next);
+});
 // MOVIES //
 router.get("/:id/movies", restricted, (req, res, next) => {
   Profile.getMovies(req.params.id)
@@ -40,16 +47,12 @@ router.get("/:id/movies", restricted, (req, res, next) => {
     .catch(next);
 });
 
-router.post(
-  "/movies", 
-  restricted, 
-  checkIfUserHasMovie, 
-    (req, res, next) => {
-    Profile.addMovie(req.body)
-      .then((newMovie) => {
-        res.json(newMovie);
-      })
-      .catch(next);
+router.post("/movies", restricted, checkIfUserHasMovie, (req, res, next) => {
+  Profile.addMovie(req.body)
+    .then((newMovie) => {
+      res.json(newMovie);
+    })
+    .catch(next);
 });
 
 router.delete("/movies", restricted, (req, res, next) => {
@@ -68,24 +71,20 @@ router.get("/:id/tv-shows", restricted, (req, res, next) => {
     .catch(next);
 });
 
-router.post(
-  "/tv-shows", 
-  restricted, 
-  checkIfUserHasTvShow, 
-    (req, res, next) => {
-    Profile.addTvShow(req.body)
-      .then((newTvShow) => {
-        res.json(newTvShow);
-      })
-      .catch(next);
+router.post("/tv-shows", restricted, checkIfUserHasTvShow, (req, res, next) => {
+  Profile.addTvShow(req.body)
+    .then((newTvShow) => {
+      res.json(newTvShow);
+    })
+    .catch(next);
 });
 
 router.delete("/tv-shows", restricted, (req, res, next) => {
-    Profile.deleteTvShow(req.body)
-      .then((deletedTvShow) => {
-        res.json(deletedTvShow);
-      })
-      .catch(next);
-  });
+  Profile.deleteTvShow(req.body)
+    .then((deletedTvShow) => {
+      res.json(deletedTvShow);
+    })
+    .catch(next);
+});
 
 module.exports = router;
