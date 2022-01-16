@@ -39,7 +39,7 @@ router.post("/following", restricted, (req, res, next) => {
     .catch(next);
 });
 // MOVIES //
-router.get("/:id/movies", restricted, (req, res, next) => {
+router.get("/:id/movies", (req, res, next) => {
   Profile.getMovies(req.params.id)
     .then((movies) => {
       res.json(movies);
@@ -63,7 +63,7 @@ router.delete("/movies", restricted, (req, res, next) => {
     .catch(next);
 });
 // TV SHOWS //
-router.get("/:id/tv-shows", restricted, (req, res, next) => {
+router.get("/:id/tv-shows", (req, res, next) => {
   Profile.getTvShows(req.params.id)
     .then((tvShows) => {
       res.json(tvShows);
