@@ -31,6 +31,14 @@ router.post("/", restricted, (req, res, next) => {
     .catch(next);
 });
 
+router.put("/", (req, res, next) => {
+  Profile.updateProfile(req.body)
+    .then((updatedProfile) => {
+      res.json(updatedProfile);
+    })
+    .catch(next);
+});
+
 router.post("/following", restricted, (req, res, next) => {
   Profile.followUser(req.body)
     .then((relationship) => {
