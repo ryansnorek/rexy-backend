@@ -15,7 +15,7 @@ router.get("/", restricted, (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", restricted, (req, res, next) => {
+router.get("/:id", (req, res, next) => {
   Profile.getProfile(req.params.id)
     .then((profile) => {
       res.json(profile);
