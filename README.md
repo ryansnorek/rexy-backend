@@ -1,4 +1,7 @@
-# REST API
+# Rexy
+
+
+**REST API**
 Node | Express | Knex | Postgres
 
 ### Engineering Notes
