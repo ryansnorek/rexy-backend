@@ -39,6 +39,14 @@ router.put("/", (req, res, next) => {
     .catch(next);
 });
 
+router.get("/followers", (req, res, next) => {
+  Profile.getFollowers(req.body)
+    .then((followers) => {
+      res.json(followers);
+    })
+    .catch(next);
+})
+
 router.post("/following", restricted, (req, res, next) => {
   Profile.followUser(req.body)
     .then((relationship) => {
@@ -46,6 +54,7 @@ router.post("/following", restricted, (req, res, next) => {
     })
     .catch(next);
 });
+
 // MOVIES //
 router.get("/:id/movies", (req, res, next) => {
   Profile.getMovies(req.params.id)
