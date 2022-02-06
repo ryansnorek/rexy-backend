@@ -11,7 +11,6 @@ module.exports = {
   getTvShows,
   addTvShow,
   deleteTvShow,
-  getFollowers,
   followUser,
   getRelationships,
 };
