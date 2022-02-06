@@ -11,8 +11,9 @@ module.exports = {
   getTvShows,
   addTvShow,
   deleteTvShow,
-  followUser,
+  addRelationship,
   getRelationships,
+  updateRelationship,
 };
 
 function getAll() {
@@ -89,15 +90,29 @@ async function deleteTvShow(tv_show) {
   return deletedTvShow;
 }
 
-
 function getRelationships(user_id) {
   return db("user_relationships").where("user_id", user_id);
 }
 
-async function followUser(relationship) {
+async function addRelationship(relationship) {
   const [newRelationship] = await db("user_relationships").insert(
     relationship,
-    ["user_id", "relative_user_id", "following"]
+    ["user_id", "relative_user_id", "following", "follower", "blocked"]
   );
   return newRelationship;
+}
+
+async function updateRelationship(relationship) {
+  const { user_id, relative_user_id } = relationship;
+  const [updatedRelationship] = await db("user_profile")
+    .where("user_id", user_id)
+    .andWhere("relative_user_id", relative_user_id)
+    .update(relationship, [
+      "user_id",
+      "relative_user_id",
+      "following",
+      "follower",
+      "blocked",
+    ]);
+  return updatedRelationship;
 }

@@ -39,14 +39,6 @@ router.put("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/followers", (req, res, next) => {
-  Profile.getFollowers(req.body)
-    .then((followers) => {
-      res.json(followers);
-    })
-    .catch(next);
-})
-
 router.get("/:id/relationships", (req, res, next) => {
   Profile.getRelationships(req.params.id)
     .then((relationships) => {
@@ -55,8 +47,8 @@ router.get("/:id/relationships", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/following", restricted, (req, res, next) => {
-  Profile.followUser(req.body)
+router.post("/", restricted, (req, res, next) => {
+  Profile.addRelationship(req.body)
     .then((relationship) => {
       res.json(relationship);
     })
