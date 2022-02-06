@@ -13,6 +13,7 @@ module.exports = {
   deleteTvShow,
   getFollowers,
   followUser,
+  getRelationships,
 };
 
 function getAll() {
@@ -89,7 +90,8 @@ async function deleteTvShow(tv_show) {
   return deletedTvShow;
 }
 
-function getFollowers(user_id) {
+
+function getRelationships(user_id) {
   return db("user_relationships").where("user_id", user_id);
 }
 
