@@ -14,7 +14,8 @@ server.use(helmet());
 server.use(cors());
 corsOptions = {
   origin: 'http://localhost:3002',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: "GET, PUT, POST"
 }
 server.use(cors(corsOptions));
 
