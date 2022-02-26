@@ -16,7 +16,7 @@ corsOptions = {
   origin: 'http://localhost:3002',
   optionsSuccessStatus: 200
 }
-app.use(cors(corsOptions));
+server.use(cors(corsOptions));
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
