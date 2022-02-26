@@ -104,7 +104,7 @@ async function addRelationship(relationship) {
 
 async function updateRelationship(relationship) {
   const { user_id, relative_user_id } = relationship;
-  const [updatedRelationship] = await db("user_profile")
+  const [updatedRelationship] = await db("user_relationships")
     .where("user_id", user_id)
     .andWhere("relative_user_id", relative_user_id)
     .update(relationship, [
