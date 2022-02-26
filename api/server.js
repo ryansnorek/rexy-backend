@@ -12,6 +12,11 @@ server.use(express.static(path.join(__dirname, "../client")));
 server.use(express.json());
 server.use(helmet());
 server.use(cors());
+corsOptions = {
+  origin: 'http://localhost:3002',
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
@@ -21,11 +26,13 @@ server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client", "index.html"));
 });
 
-server.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-  });
+// server.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+//   });
+
+
 
 
 server.use((err, req, res, next) => {
