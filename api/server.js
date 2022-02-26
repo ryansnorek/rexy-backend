@@ -12,12 +12,11 @@ server.use(express.static(path.join(__dirname, "../client")));
 server.use(express.json());
 server.use(helmet());
 server.use(cors());
-corsOptions = {
-  origin: 'http://localhost:3002',
-  optionsSuccessStatus: 200,
-  methods: "GET, PUT, POST"
-}
-server.use(cors(corsOptions));
+
+server.use(cors({
+  origin: '*',
+  methods: ['GET','POST','DELETE','PUT']
+}));
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
