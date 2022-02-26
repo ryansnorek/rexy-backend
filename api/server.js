@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
-// const cors = require("cors");
+const cors = require("cors");
 
 const authRouter = require("./auth/auth.router");
 const usersRouter = require("./routers/users-router");
@@ -11,12 +11,7 @@ const server = express();
 server.use(express.static(path.join(__dirname, "../client")));
 server.use(express.json());
 server.use(helmet());
-// server.use(cors());
-
-// server.use(cors({
-//   origin: '*',
-//   methods: ['GET','POST','DELETE','PUT']
-// }));
+server.use(cors());
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
@@ -31,8 +26,6 @@ server.get("/", (req, res) => {
 //   res.header("Access-Control-Allow-Headers", "X-Requested-With");
 //   next();
 //   });
-
-
 
 
 server.use((err, req, res, next) => {
