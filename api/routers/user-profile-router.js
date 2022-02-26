@@ -52,7 +52,7 @@ router.get("/:id/relationships", (req, res, next) => {
 router.post(
   "/relationships",
   restricted,
-  checkIfRelationshipExists,
+  // checkIfRelationshipExists,
   (req, res, next) => {
     Profile.addRelationship(req.body)
       .then((relationship) => {
@@ -65,7 +65,7 @@ router.post(
 router.put(
   "/relationships",
   restricted,
-  checkIfRelationshipDoesntExist,
+  // checkIfRelationshipDoesntExist,
   (req, res, next) => {
     Profile.updateRelationship(req.body)
       .then((relationship) => {
@@ -75,13 +75,13 @@ router.put(
   }
 );
 
-// router.delete("/relationships", restricted, (req, res, next) => {
-//   Profile.deleteRelationship(req.body)
-//     .then((deletedMovie) => {
-//       res.json(deletedMovie);
-//     })
-//     .catch(next);
-// });
+router.delete("/relationships", restricted, (req, res, next) => {
+  Profile.deleteRelationship(req.body)
+    .then((deletedMovie) => {
+      res.json(deletedMovie);
+    })
+    .catch(next);
+});
 
 // MOVIES //
 router.get("/:id/movies", (req, res, next) => {
