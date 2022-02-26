@@ -52,7 +52,7 @@ router.get("/:id/relationships", (req, res, next) => {
 router.post(
   "/relationships",
   restricted,
-  // checkIfRelationshipExists,
+  checkIfRelationshipExists,
   (req, res, next) => {
     Profile.addRelationship(req.body)
       .then((relationship) => {
@@ -65,7 +65,7 @@ router.post(
 router.put(
   "/relationships",
   restricted,
-  // checkIfRelationshipDoesntExist,
+  checkIfRelationshipDoesntExist,
   (req, res, next) => {
     Profile.updateRelationship(req.body)
       .then((relationship) => {
