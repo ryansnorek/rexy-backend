@@ -75,6 +75,14 @@ router.put(
   }
 );
 
+router.delete("/relationships", restricted, (req, res, next) => {
+  Profile.deleteRelationship(req.body)
+    .then((deletedMovie) => {
+      res.json(deletedMovie);
+    })
+    .catch(next);
+});
+
 // MOVIES //
 router.get("/:id/movies", (req, res, next) => {
   Profile.getMovies(req.params.id)

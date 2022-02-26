@@ -1,4 +1,3 @@
-const res = require("express/lib/response");
 const db = require("../data/db-config");
 
 module.exports = {
@@ -15,6 +14,7 @@ module.exports = {
   addRelationship,
   getRelationships,
   updateRelationship,
+  deleteRelationship,
 };
 
 function getAll() {
@@ -116,4 +116,13 @@ async function updateRelationship(relationship) {
       "blocked",
     ]);
   return updatedRelationship;
+}
+
+async function deleteRelationship(relationship) {
+  const { user_id, relative_user_id } = relationship;
+  const [deletedRelationship] = await db("user_relationships")
+    .where("user_id", user_id)
+    .andWhere("relative_user_id", relative_user_id)
+    .delete(["user_id", "relative_user_id"]);
+  return deletedRelationship;
 }
