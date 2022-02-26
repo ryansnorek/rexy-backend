@@ -11,7 +11,7 @@ const server = express();
 server.use(express.static(path.join(__dirname, "../client")));
 server.use(express.json());
 server.use(helmet());
-server.use(cors());
+// server.use(cors());
 
 server.use(cors({
   origin: '*',
