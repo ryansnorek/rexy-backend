@@ -44,7 +44,10 @@ router.post(
       const token = tokenBuilder(req.user);
       res.json({ 
           user_id: req.user.user_id,
-          message: `welcome, ${req.user.username}`, 
+          username: req.user.username,
+          email: req.user.email,
+          phone: req.user.phone,
+          message: `welcome, ${req.user.username}`,
           token 
       });
     }

@@ -6,6 +6,9 @@ exports.up = async (knex) => {
       users.string("password", 333).notNullable();
       users.string("phone", 10).notNullable().unique();
       users.string("email", 333).notNullable().unique();
+      users.string("display_name", 333);
+      users.string("personality_type", 4);
+      users.string("uploaded_image", 2000);
       users.boolean("admin").defaultsTo(false);
       users.timestamps(false, true);
     })
