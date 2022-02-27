@@ -8,39 +8,7 @@ const {
 } = require("../middleware/user-profile-middleware");
 const Profile = require("../models/user-profile-model");
 
-// PROFILE //
-router.get("/", restricted, (req, res, next) => {
-  Profile.getAll()
-    .then((profiles) => {
-      res.json(profiles);
-    })
-    .catch(next);
-});
-
-router.get("/:id", (req, res, next) => {
-  Profile.getProfile(req.params.id)
-    .then((profile) => {
-      res.json(profile);
-    })
-    .catch(next);
-});
-
-router.post("/", restricted, (req, res, next) => {
-  Profile.createProfile(req.body)
-    .then((newProfile) => {
-      res.json(newProfile);
-    })
-    .catch(next);
-});
-
-router.put("/", (req, res, next) => {
-  Profile.updateProfile(req.body)
-    .then((updatedProfile) => {
-      res.json(updatedProfile);
-    })
-    .catch(next);
-});
-
+// RELATIONSHIPS //
 router.get("/:id/relationships", (req, res, next) => {
   Profile.getRelationships(req.params.id)
     .then((relationships) => {
