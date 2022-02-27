@@ -6,7 +6,6 @@ function getAll() {
 
 function getById(user_id) {
   return db("users")
-    .select("user_id", "username", "created_at", "updated_at")
     .where("user_id", user_id)
     .first();
 }
@@ -26,10 +25,6 @@ async function createUser(user) {
     "user_id",
     "username",
     "password",
-    "phone",
-    "email",
-    "display_name",
-    "uploaded_image",
   ]);
   return newUser;
 }

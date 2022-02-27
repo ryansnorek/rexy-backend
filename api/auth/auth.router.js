@@ -44,12 +44,6 @@ router.post(
       const token = tokenBuilder(req.user);
       res.json({ 
           user_id: req.user.user_id,
-          username: req.user.username,
-          email: req.user.email,
-          phone: req.user.phone,
-          display_name: req.user.display_name,
-          personality_type: req.user.personality_type,
-          uploaded_image: req.user.uploaded_image,
           admin: req.user.admin,
           message: `welcome, ${req.user.username}`,
           token 
