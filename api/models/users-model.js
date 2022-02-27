@@ -13,7 +13,6 @@ function getById(user_id) {
 
 function findByUsername(username) {
   return db("users")
-    .select("user_id", "username", "password")
     .where("username", username)
     .first();
 }
