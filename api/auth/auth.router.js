@@ -17,14 +17,13 @@ router.post(
     checkIfUserExistsAlready,
     hashPassword,
     (req, res, next) => {
-      const { username, password, phone, email } = req.body;
       Users.createUser({
-        username,
-        password,
-        phone,
-        email,
-        display_name,
-        uploaded_image,
+        username: req.body.username,
+        password: req.body.password,
+        phone: req.body.phone,
+        email: req.body.email,
+        display_name: req.body.display_name,
+        uploaded_image: req.body.uploaded_image,
       })
         .then((newUser) => {
           res.json(newUser);
