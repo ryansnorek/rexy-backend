@@ -28,6 +28,8 @@ async function createUser(user) {
     "password",
     "phone",
     "email",
+    "display_name",
+    "uploaded_image",
   ]);
   return newUser;
 }
