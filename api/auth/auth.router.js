@@ -23,6 +23,8 @@ router.post(
         password,
         phone,
         email,
+        display_name,
+        uploaded_image,
       })
         .then((newUser) => {
           res.json(newUser);
