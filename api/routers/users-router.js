@@ -32,7 +32,6 @@ router.put(
   "/:id",
   checkIfUserExists,
   hashPassword,
-  restricted,
   (req, res, next) => {
     Users.updateUser(req.body, req.params.id)
       .then((updatedUser) => {
