@@ -12,9 +12,7 @@ function getById(user_id) {
 }
 
 function findByUsername(username) {
-  return db("users")
-    .where("username", username)
-    .first();
+  return db("users").where("username", username).first();
 }
 
 function searchUsername(query) {
@@ -37,7 +35,15 @@ async function createUser(user) {
 async function updateUser(user, user_id) {
   const [updatedUser] = await db("users")
     .where("user_id", user_id)
-    .update(user);
+    .update(user, [
+      "user_id",
+      "username",
+      "password",
+      "phone",
+      "email",
+      "display_name",
+      "uploaded_image",
+    ]);
   return updatedUser;
 }
 
