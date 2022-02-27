@@ -8,8 +8,8 @@
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "rollbackh": "heroku run knex migrate:rollback -a rexyapp",
-    "migrateh": "heroku run knex migrate:latest -a rexyapp",
     "deploy": "git push heroku main",
+    "migrateh": "heroku run knex migrate:latest -a rexyapp",
     "databaseh": "heroku pg:psql -a rexyapp",
     "seedh": "heroku run knex seed:run -a rexyapp",
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand"
