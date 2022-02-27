@@ -13,6 +13,13 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+  });
+
+
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/profile", profileRouter);
@@ -20,13 +27,6 @@ server.use("/api/profile", profileRouter);
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client", "index.html"));
 });
-
-// server.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   next();
-//   });
-
 
 server.use((err, req, res, next) => {
   res.status(err.status || 500).json({
