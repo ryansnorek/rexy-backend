@@ -12,20 +12,6 @@ exports.up = async (knex) => {
       users.boolean("admin").defaultsTo(false);
       users.timestamps(false, true);
     })
-    .createTable("user_profile", (user_profile) => {
-      user_profile.increments("user_profile_id");
-      user_profile.string("display_name", 333);
-      user_profile.string("personality_type", 4);
-      user_profile.string("uploaded_image", 2000);
-      user_profile.timestamps(false, true);
-      user_profile
-        .integer("user_id")
-        .unsigned()
-        .notNullable()
-        .references("user_id")
-        .inTable("users")
-        .onDelete("CASCADE");
-    })
     .createTable("user_movies", (user_movies) => {
       user_movies.increments("user_movie_id");
       user_movies.integer("movie_id").notNullable();
