@@ -37,7 +37,7 @@ async function createUser(user) {
 async function updateUser(user, user_id) {
   const [updatedUser] = await db("users")
     .where("user_id", user_id)
-    .update(user, ["user_id", "username"]);
+    .update(user);
   return updatedUser;
 }
 
