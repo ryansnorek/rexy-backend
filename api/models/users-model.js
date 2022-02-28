@@ -16,7 +16,7 @@ function findByUsername(username) {
 
 function searchUsername(query) {
   return db("users")
-    .select("user_id", "username")
+    .select("user_id", "username", "display_name", "uploaded_image")
     .where("username", "like", `%${query}%`);
 }
 
