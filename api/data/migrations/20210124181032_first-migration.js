@@ -36,6 +36,54 @@ exports.up = async (knex) => {
         .inTable("users")
         .onDelete("CASCADE");
     })
+    .createTable("watchlist_movies", (watchlist_movies) => {
+      watchlist_movies.increments("watchlist_movie_id");
+      watchlist_movies.integer("movie_id").notNullable();
+      watchlist_movies.timestamps(false, true);
+      watchlist_movies
+        .integer("user_id")
+        .unsigned()
+        .notNullable()
+        .references("user_id")
+        .inTable("users")
+        .onDelete("CASCADE");
+    })
+    .createTable("watchlist_shows", (watchlist_shows) => {
+      watchlist_shows.increments("watchlist_show_id");
+      watchlist_shows.integer("show_id").notNullable();
+      watchlist_shows.timestamps(false, true);
+      watchlist_shows
+        .integer("user_id")
+        .unsigned()
+        .notNullable()
+        .references("user_id")
+        .inTable("users")
+        .onDelete("CASCADE");
+    })
+    .createTable("rexy_movies", (rexy_movies) => {
+      rexy_movies.increments("rexy_movie_id");
+      rexy_movies.integer("movie_id").notNullable();
+      rexy_movies.timestamps(false, true);
+      rexy_movies
+        .integer("user_id")
+        .unsigned()
+        .notNullable()
+        .references("user_id")
+        .inTable("users")
+        .onDelete("CASCADE");
+    })
+    .createTable("rexy_shows", (rexy_shows) => {
+      rexy_shows.increments("rexy_show_id");
+      rexy_shows.integer("show_id").notNullable();
+      rexy_shows.timestamps(false, true);
+      rexy_shows
+        .integer("user_id")
+        .unsigned()
+        .notNullable()
+        .references("user_id")
+        .inTable("users")
+        .onDelete("CASCADE");
+    })
     .createTable("user_relationships", (user_relationships) => {
       user_relationships.increments("user_relationship_id");
       user_relationships.boolean("blocked")

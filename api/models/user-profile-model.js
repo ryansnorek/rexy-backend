@@ -1,10 +1,10 @@
 const db = require("../data/db-config");
 
 module.exports = {
-  getAll,
-  getProfile,
-  createProfile,
-  updateProfile,
+  // getAll,
+  // getProfile,
+  // createProfile,
+  // updateProfile,
   getMovies,
   addMovie,
   deleteMovie,
@@ -17,35 +17,35 @@ module.exports = {
   deleteRelationship,
 };
 
-function getAll() {
-  return db("user_profile");
-}
+// function getAll() {
+//   return db("user_profile");
+// }
 
-function getProfile(user_id) {
-  return db("user_profile").where("user_id", user_id).first();
-}
+// function getProfile(user_id) {
+//   return db("user_profile").where("user_id", user_id).first();
+// }
 
-async function createProfile(profile) {
-  const [newProfile] = await db("user_profile").insert(profile, [
-    "user_profile_id",
-    "display_name",
-    "personality_type",
-    "uploaded_image",
-    "user_id",
-  ]);
-  return newProfile;
-}
-async function updateProfile(profile, user_id) {
-  const [updatedProfile] = await db("user_profile")
-    .where("user_id", user_id)
-    .update(profile, [
-      "user_id",
-      "display_name",
-      "personality_type",
-      "uploaded_image",
-    ]);
-  return updatedProfile;
-}
+// async function createProfile(profile) {
+//   const [newProfile] = await db("user_profile").insert(profile, [
+//     "user_profile_id",
+//     "display_name",
+//     "personality_type",
+//     "uploaded_image",
+//     "user_id",
+//   ]);
+//   return newProfile;
+// }
+// async function updateProfile(profile, user_id) {
+//   const [updatedProfile] = await db("user_profile")
+//     .where("user_id", user_id)
+//     .update(profile, [
+//       "user_id",
+//       "display_name",
+//       "personality_type",
+//       "uploaded_image",
+//     ]);
+//   return updatedProfile;
+// }
 
 function getMovies(user_id) {
   return db("user_movies").where("user_id", user_id).select("movie_id");
