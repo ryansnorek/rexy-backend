@@ -16,7 +16,15 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", restricted, (req, res, next) => {
+router.get("/", (req, res, next) => {
+    Relationships.getRelationship(req.body)
+      .then((relationships) => {
+        res.json(relationships);
+      })
+      .catch(next);
+  });
+
+router.post("/", restricted, relationshipDoesntExist, (req, res, next) => {
   Relationships.addRelationship(req.body)
     .then((relationship) => {
       res.json(relationship);
@@ -24,7 +32,7 @@ router.post("/", restricted, (req, res, next) => {
     .catch(next);
 });
 
-router.put("/", restricted, (req, res, next) => {
+router.put("/", restricted, relationshipExists, (req, res, next) => {
   Relationships.updateRelationship(req.body)
     .then((relationship) => {
       res.json(relationship);

@@ -2,6 +2,7 @@ const db = require("../data/db-config");
 
 module.exports = {
   getRelationships,
+  getRelationship,
   addRelationship,
   updateRelationship,
   deleteRelationship,
@@ -9,6 +10,14 @@ module.exports = {
 
 function getRelationships(user_id) {
   return db("user_relationships").where("user_id", user_id);
+}
+
+function getRelationship(relationship) {
+  const { user_id, relative_user_id } = relationship;
+  return db("user_relationships")
+    .where("user_id", user_id)
+    .andWhere("relative_user_id", relative_user_id)
+    .first();
 }
 
 async function addRelationship(relationship) {

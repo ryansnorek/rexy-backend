@@ -1,13 +1,9 @@
-const { getRelationships } = require("../models/relationships-model");
+const { getRelationship } = require("../models/relationships-model");
 
 module.exports = { relationshipExists, relationshipDoesntExist };
 
 async function relationshipExists(req, res, next) {
-  const { user_id, relative_user_id } = req;
-  const currentRelationships = await getRelationships(user_id);
-  const exists = currentRelationships.find(
-    (rel) => rel.relative_user_id === relative_user_id
-  );
+  const exists = await getRelationship(req.body);
   if (!exists) {
     return next({
       message: "relationship does not exist",
@@ -18,11 +14,7 @@ async function relationshipExists(req, res, next) {
 }
 
 async function relationshipDoesntExist(req, res, next) {
-  const { user_id, relative_user_id } = req;
-  const currentRelationships = await getRelationships(user_id);
-  const exists = currentRelationships.find(
-    (rel) => rel.relative_user_id === relative_user_id
-  );
+  const exists = await getRelationship(req.body);
   if (exists) {
     return next({
       message: "relationship already exists",
