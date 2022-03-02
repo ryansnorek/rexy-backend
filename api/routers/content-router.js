@@ -125,4 +125,5 @@ router.delete("/shows/rexys", restricted, (req, res, next) => {
     })
     .catch(next);
 });
+
 module.exports = router;

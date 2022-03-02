@@ -3,8 +3,6 @@ const { getMovies, getTvShows, getRelationships } = require("../models/user-prof
 module.exports = {
   checkIfUserHasMovie,
   checkIfUserHasTvShow,
-  checkIfRelationshipExists,
-  checkIfRelationshipDoesntExist,
 };
 
 async function checkIfUserHasMovie(req, res, next) {
@@ -36,33 +34,3 @@ async function checkIfUserHasTvShow(req, res, next) {
   }
   next();
 }
-
-async function checkIfRelationshipExists(req, res, next) {
-  const { user_id, relative_user_id } = req;
-  const currentRelationships = await getRelationships(user_id);
-  const exists = currentRelationships.find(
-    (rel) => rel.relative_user_id === relative_user_id
-  );
-  if (exists) {
-    return next({
-        message: "relationship already exists",
-        status: 403,
-    })
-  }
-  next();
-}
-
-async function checkIfRelationshipDoesntExist(req, res, next) {
-    const { user_id, relative_user_id } = req;
-    const currentRelationships = await getRelationships(user_id);
-    const exists = currentRelationships.find(
-      (rel) => rel.relative_user_id === relative_user_id
-    );
-    if (!exists) {
-      return next({
-          message: "relationship doesn't exist",
-          status: 404,
-      })
-    }
-    next();
-  }

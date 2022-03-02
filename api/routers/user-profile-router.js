@@ -3,8 +3,6 @@ const restricted = require("../middleware/restricted");
 const {
   checkIfUserHasMovie,
   checkIfUserHasTvShow,
-  checkIfRelationshipExists,
-  checkIfRelationshipDoesntExist,
 } = require("../middleware/user-profile-middleware");
 const Profile = require("../models/user-profile-model");
 
@@ -17,31 +15,21 @@ router.get("/:id/relationships", (req, res, next) => {
     .catch(next);
 });
 
-router.post(
-  "/relationships",
-  restricted,
-  // checkIfRelationshipExists,
-  (req, res, next) => {
-    Profile.addRelationship(req.body)
-      .then((relationship) => {
-        res.json(relationship);
-      })
-      .catch(next);
-  }
-);
+router.post("/relationships", restricted, (req, res, next) => {
+  Profile.addRelationship(req.body)
+    .then((relationship) => {
+      res.json(relationship);
+    })
+    .catch(next);
+});
 
-router.put(
-  "/relationships",
-  restricted,
-  // checkIfRelationshipDoesntExist,
-  (req, res, next) => {
-    Profile.updateRelationship(req.body)
-      .then((relationship) => {
-        res.json(relationship);
-      })
-      .catch(next);
-  }
-);
+router.put("/relationships", restricted, (req, res, next) => {
+  Profile.updateRelationship(req.body)
+    .then((relationship) => {
+      res.json(relationship);
+    })
+    .catch(next);
+});
 
 router.delete("/relationships", restricted, (req, res, next) => {
   Profile.deleteRelationship(req.body)
