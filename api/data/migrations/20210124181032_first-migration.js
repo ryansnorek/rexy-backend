@@ -107,8 +107,11 @@ exports.up = async (knex) => {
 exports.down = async (knex) => {
   await knex.schema
     .dropTableIfExists("user_relationships")
+    .dropTableIfExists("rexy_shows")
+    .dropTableIfExists("rexy_movies")
+    .dropTableIfExists("watchlist_shows")
+    .dropTableIfExists("watchlist_movies")
     .dropTableIfExists("user_tv_shows")
     .dropTableIfExists("user_movies")
-    .dropTableIfExists("user_profile")
     .dropTableIfExists("users");
 };
