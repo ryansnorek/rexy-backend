@@ -113,5 +113,5 @@ exports.down = async (knex) => {
     .dropTableIfExists("watchlist_movies")
     .dropTableIfExists("user_tv_shows")
     .dropTableIfExists("user_movies")
-    .dropTableIfExists("users");
+    .dropTableIfExists("users")
 };

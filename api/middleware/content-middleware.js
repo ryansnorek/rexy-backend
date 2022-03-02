@@ -31,7 +31,7 @@ async function checkIfUserHasWatchlistShow(req, res, next) {
   const userTvShows = await getWatchlistShows(req.body.user_id);
   if (!userTvShows) return next();
   const hasTvShow = userTvShows.find(
-    (show) => show.tv_show_id === req.body.tv_show_id
+    (show) => show.show_id === req.body.show_id
   );
   if (hasTvShow) {
     return next({
@@ -61,7 +61,7 @@ async function checkIfUserHasRexyShow(req, res, next) {
   const userTvShows = await getRexyShows(req.body.user_id);
   if (!userTvShows) return next();
   const hasTvShow = userTvShows.find(
-    (show) => show.tv_show_id === req.body.tv_show_id
+    (show) => show.show_id === req.body.show_id
   );
   if (hasTvShow) {
     return next({
