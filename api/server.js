@@ -7,6 +7,7 @@ const authRouter = require("./auth/auth.router");
 const usersRouter = require("./routers/users-router");
 const profileRouter = require("./routers/user-profile-router");
 const contentRouter = require("./routers/content-router");
+const relationshipsRouter = require("./routers/relationships-router");
 
 const server = express();
 server.use(express.static(path.join(__dirname, "../client")));
@@ -25,6 +26,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/profile", profileRouter);
 server.use("/api/content", contentRouter);
+server.use("/api/relationships", relationshipsRouter);
 
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client", "index.html"));

@@ -16,7 +16,7 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", restricted, relationshipDoesntExist, (req, res, next) => {
+router.post("/", restricted, (req, res, next) => {
   Relationships.addRelationship(req.body)
     .then((relationship) => {
       res.json(relationship);
@@ -24,7 +24,7 @@ router.post("/", restricted, relationshipDoesntExist, (req, res, next) => {
     .catch(next);
 });
 
-router.put("/", restricted, relationshipExists, (req, res, next) => {
+router.put("/", restricted, (req, res, next) => {
   Relationships.updateRelationship(req.body)
     .then((relationship) => {
       res.json(relationship);
