@@ -60,7 +60,9 @@ async function deleteWatchlistShow(show) {
 
 // REXYS //
 function getRexyMovies(user_id) {
-  return db("rexy_movies").where("user_id", user_id).select("movie_id");
+  return db("rexy_movies")
+    .where("user_id", user_id)
+    .select("movie_id", "relative_user_id");
 }
 
 async function addRexyMovie(movie) {
@@ -81,7 +83,9 @@ async function deleteRexyMovie(movie) {
 }
 
 function getRexyShows(user_id) {
-  return db("rexy_shows").where("user_id", user_id).select("show_id");
+  return db("rexy_shows")
+    .where("user_id", user_id)
+    .select("show_id", "relative_user_id");
 }
 
 async function addRexyShow(show) {

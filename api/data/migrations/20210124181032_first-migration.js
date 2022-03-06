@@ -63,6 +63,7 @@ exports.up = async (knex) => {
     .createTable("rexy_movies", (rexy_movies) => {
       rexy_movies.increments("rexy_movie_id");
       rexy_movies.integer("movie_id").notNullable();
+      rexy_movies.integer("relative_user_id")
       rexy_movies.timestamps(false, true);
       rexy_movies
         .integer("user_id")
@@ -75,6 +76,7 @@ exports.up = async (knex) => {
     .createTable("rexy_shows", (rexy_shows) => {
       rexy_shows.increments("rexy_show_id");
       rexy_shows.integer("show_id").notNullable();
+      rexy_shows.integer("relative_user_id")
       rexy_shows.timestamps(false, true);
       rexy_shows
         .integer("user_id")
